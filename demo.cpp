@@ -8,16 +8,20 @@
 
 #define ARR_SIZE 512
 
+using namespace std;
+
 int main(int argc, char** argv){
   srand(time(NULL));
-  uint64_t i, y = 0, x = 0;
+  uint16_t y = 0, x = 0;
+  uint64_t i;
   float** function_output = interpolation_noise(ARR_SIZE, 64);
+
   if(function_output == NULL){
-    std::cout<<"ERROR: interpolation_noise function returned NULL."<<std::endl;
+    cout<<"ERROR: interpolation_noise function returned NULL."<<endl;
     return 1;
   }
-  sf::Uint8* noiseimgarray = new sf::Uint8[ARR_SIZE*ARR_SIZE*4]; //Array of pixels. Will be converted into sf::Uint8 array from the return value of the 'interpolation_noise' function below
-  //Convert from interpolation_noise return value to SFML image array
+
+  sf::Uint8* noiseimgarray = new sf::Uint8[ARR_SIZE*ARR_SIZE*4];
   for(i=0;i<ARR_SIZE*ARR_SIZE*4;i++){
     if((i+1) % 4 == 0){
       noiseimgarray[i] = function_output[y][x] * 255;
@@ -30,10 +34,12 @@ int main(int argc, char** argv){
       noiseimgarray[i] = 0;
     }
   }
-  for(i=0;i<ARR_SIZE;i++){
-    free(function_output[i]);
+
+  for(y=0;y<ARR_SIZE;y++){
+    free(function_output[y]);
   }
   free(function_output);
+  
   sf::Image noise;
   noise.create(ARR_SIZE, ARR_SIZE, noiseimgarray);
   delete[] noiseimgarray;
@@ -41,7 +47,7 @@ int main(int argc, char** argv){
   if(argc >= 2){
     if(strcmp(argv[1], "-img") == 0){
       noise.saveToFile("interpolation-noise.png");
-      std::cout<<"Saved 'interpolation-noise.png'"<<std::endl;
+      cout<<"Saved 'interpolation-noise.png'"<<endl;
       return 0;
     }
   }

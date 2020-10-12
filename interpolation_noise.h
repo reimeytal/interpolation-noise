@@ -6,7 +6,7 @@
 #define IN_RANDOMFLOAT ((rand()%100)/100.f)
 
 float** interpolation_noise(uint16_t size, uint16_t frequency){ //Size represents the size of the array. Frequency represents the space between the random pixels (lower frequency, more randomness)
-  if(size%frequency != 0){
+  if(size%frequency != 0 || size == 0 || frequency == 0 || frequency > size){
     return NULL;
   }
   uint16_t y, x;
