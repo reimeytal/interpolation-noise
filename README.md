@@ -5,23 +5,23 @@ A simple noise algorithm in C (+ a demo in C++)
 The algorithm is meant to be an alternative to Perlin Noise. The algorithm is free to use everywhere. It would be highly appreciated if you could credit me and let me know where the algorithm is used.
 
 ### Information
-The two parameters of the `interpolation_noise` function are size and frequency respectively.
+The function `interpolation_noise` takes in 3 parameters. They are array, size and frequency respectively.
 
-The size parameter defines the size of the square that the function will return. For example, if the size parameter is 512, the function will return a 2D floating point number array whose dimensions are 512 by 512. The size parameter is an unsigned 16-bit integer.
+The array parameter takes in a 2D array. The size of the dimensions of the array should be the size parameter in both dimensions.
+
+The size parameter defines the size of the dimensions of the array.
 
 The frequency parameter changes the 'frequency' of the randomness. The number passed into it is the number of pixels in between each random pixel. It is also an unsigned 16-bit integer.
 
 The `interpolation_noise.h` file has no dependencies other than the C standard library. It is not platform specific.
 
-The array returned by the function is allocated using `malloc` inside the function. Don't forget to __free (free() function) every element on the y-axis before freeing the y-axis array itself__.
-
 __Make sure to call the `srand` function (from `stdlib.h`) since the `interpolation_noise` function relies on `rand`.__
 
 ### Restrictions
 
-* If the frequency parameter is larger than or equal to the size parameter, the function will return NULL.
-* If there is a remainder after dividing the size parameter by the frequency parameter, the function will return NULL.
-* If any parameter is equal to 0, the function will return NULL.
+* If the frequency parameter is larger than or equal to the size parameter, the function will return.
+* If there is a remainder after dividing the size parameter by the frequency parameter, the function will return.
+* If the frequency or size parameters are equal to 0, the function will return.
 
 ### demo.cpp
 
