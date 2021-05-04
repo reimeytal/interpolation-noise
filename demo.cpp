@@ -14,11 +14,11 @@ int main(int argc, char** argv){
   srand(time(NULL));
   uint16_t y = 0, x = 0;
   uint64_t i;
-  float** function_output = (float**)malloc(sizeof(float) * ARR_SIZE);
+  float** function_output = (float**)malloc(sizeof(float*) * ARR_SIZE);
   for(i=0;i<ARR_SIZE;i++){
     function_output[i] = (float*)malloc(sizeof(float) * ARR_SIZE);
   }
-  interpolation_noise(function_output, ARR_SIZE, 64);
+  interpolation_noise(function_output, ARR_SIZE, 128, NULL);
 
   if(function_output == NULL){
     cout<<"ERROR: interpolation_noise function returned NULL."<<endl;

@@ -5,13 +5,15 @@ A simple noise algorithm in C (+ a demo in C++)
 The algorithm is meant to be an alternative to Perlin Noise. The algorithm is free to use everywhere. It would be highly appreciated if you could credit me and let me know where the algorithm is used.
 
 ### Information
-The function `interpolation_noise` takes in 3 parameters. They are array, size and frequency respectively.
+The function `interpolation_noise` takes in 4 parameters. They are array, size, frequency and corners respectively.
 
 The array parameter takes in a 2D array. The size of the dimensions of the array should be the size parameter in both dimensions.
 
 The size parameter defines the size of the dimensions of the array.
 
 The frequency parameter changes the 'frequency' of the randomness. The number passed into it is the number of pixels in between each random pixel. It is also an unsigned 16-bit integer.
+
+The corners parameter takes in a float array (float pointer). The array must be 4 floats long. The floats in the array represent the values of the corners of the array. If the parameter is set to ```NULL```, then the values of the corners will be randomly generated. If the value of a corner is set to a number smaller than 0 or greater than 1, then the value of the corner will be randomly generated. The order of the corners in the array are: top-left, top-right, bottom-left, bottom-right.
 
 The `interpolation_noise.h` file has no dependencies other than the C standard library. It is not platform specific.
 
